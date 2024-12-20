@@ -17,15 +17,12 @@
 .squiggly-line {
 	left: 0;
 }
-.circles,
-.topLine {
-	width: 35%;
-}
 
 .circles {
-	right: -15%;
 	top: 50%;
+	right: -15%;
 	transform: translateY(-50%);
+	width: 35%;
 }
 
 .lines {
@@ -41,4 +38,5 @@
 .topLine {
 	top: 4%;
 	right: 0;
+	width: 33%;
 }

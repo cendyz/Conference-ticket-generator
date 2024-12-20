@@ -1,18 +1,15 @@
-import { Patterns } from './components'
+import { Patterns, Main } from './components'
 const App = () => {
 	return (
 		<>
 			<Patterns />
+			<Main />
 		</>
 	)
 }
 export default App
 
-//  <!-- Form starts -->
-
-//   Your Journey to Coding Conf 2025 Starts Here!
-
-//   Secure your spot at next year's biggest coding conference.
+//   
 
 //   Upload Avatar
 //   Drag and drop or click to upload

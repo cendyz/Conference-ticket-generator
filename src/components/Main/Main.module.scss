@@ -1,0 +1,27 @@
+@use '../../sass/colors.scss' as *;
+
+.main {
+	padding: 2.3em 1.55em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 375px;
+}
+
+.logo {
+	margin-bottom: 2.3em;
+	width: 55%;
+}
+
+.title {
+	color: $neutral-0;
+	font-size: 2.82rem;
+	line-height: 1.1;
+}
+
+.text {
+	margin-top: 1.3em;
+	color: $neutral-300;
+	text-align: center;
+	line-height: 1.2;
+}
