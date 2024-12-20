@@ -1,0 +1,44 @@
+@use '../../../sass/colors.scss' as *;
+@use '../../../sass/fonts.scss' as *;
+
+.form {
+	padding: 0 0.8em 3em;
+}
+
+.avatarLabel {
+	color: $neutral-0;
+}
+
+.avatarInput {
+	display: none;
+}
+
+.uploadBox {
+	margin-top: 0.7em;
+}
+
+.uploadIcon {
+	padding: 0.5em;
+	background-color: $transparent-icon;
+	border-radius: 0.5em;
+	border: 1px solid $neutral-700;
+}
+
+.customFileUpload {
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 0.6em;
+	width: 100%;
+	border: 1px dashed $neutral-500;
+	border-radius: 0.4em;
+	background-color: $transparent-bg;
+	cursor: pointer;
+}
+
+.uploadDesc {
+	color: $neutral-500;
+	font-size: 1.8rem;
+    font-weight: $weights-500;
+}
