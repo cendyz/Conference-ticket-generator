@@ -1,0 +1,44 @@
+.patterns {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.circles,
+.lines,
+.bottomLine,
+.topLine {
+	position: absolute;
+}
+
+.lines,
+.squiggly-line {
+	left: 0;
+}
+.circles,
+.topLine {
+	width: 35%;
+}
+
+.circles {
+	right: -15%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.lines {
+	top: 0;
+	width: 258%;
+}
+
+.bottomLine {
+	width: 77%;
+	bottom: 0;
+}
+
+.topLine {
+	top: 4%;
+	right: 0;
+}
