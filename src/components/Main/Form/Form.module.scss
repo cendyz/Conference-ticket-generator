@@ -100,6 +100,7 @@
 }
 
 .submitBtn {
+	margin-top: 1.2em;
 	padding: 0.7em 0;
 	display: block;
 	font-size: 1.9rem;
@@ -109,6 +110,7 @@
 }
 
 .errorBox {
+	display: none;
 	margin-top: 0.4em;
 }
 
@@ -119,4 +121,8 @@
 
 .errorIcon {
 	filter: invert(73%) sepia(43%) saturate(7498%) brightness(93%);
+}
+
+.errorTextColor {
+	color: $orange-700;
 }

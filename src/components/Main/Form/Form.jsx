@@ -1,5 +1,6 @@
 import styles from './Form.module.scss'
 import { useState } from 'react'
+import classNames from 'classnames'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -9,9 +10,26 @@ const Form = () => {
 		email: '',
 		username: '',
 	})
+	const [fileError, setFileError] = useState(false)
+	const [avatarError, setAvatarError] = useState(
+		'Upload your photo (JPG or PNG, max 500KB)'
+	)
 
 	const handleChange = e => {
 		setUser({ ...user, [e.target.name]: e.target.value })
+	}
+
+	const handleFileChange = e => {
+		const selectedFile = e.target.files[0]
+		if (selectedFile && selectedFile.size > 500 * 1024) {
+			setAvatarError(
+				'File too large. Please upload a file less than 500KB'
+			)
+			setFileError(true)
+		} else {
+			setAvatarError('Your photo is uploaded successfully!')
+			setFileError(false)
+		}
 	}
 
 	const checkEmail = email => {
@@ -23,7 +41,7 @@ const Form = () => {
 	}
 
 	const handleSubmit = e => {
-		e.preventDefault()
+		// e.preventDefault()
 
 		const formData = new FormData(e.currentTarget)
 		const newUser = Object.fromEntries(formData)
@@ -58,16 +76,26 @@ const Form = () => {
 					type='file'
 					name='avatar'
 					accept='image/png, image/jpeg'
+					onChange={handleFileChange}
 				/>
 			</div>
 			<div className={styles.avatarErrorInfo}>
 				<img
 					src='src/images/icon-info.svg'
 					alt='Alert icon'
-					className={styles.alertIcon}
+					className={
+						fileError
+							? classNames(styles.alertIcon, styles.errorIcon)
+							: styles.alertIcon
+					}
 				/>
-				<span className={styles.errorInfo}>
-					Upload your photo (JPG or PNG, max size: 500KB).
+				<span
+					className={
+						fileError
+							? classNames(styles.errorInfo, styles.errorTextColor)
+							: styles.errorInfo
+					}>
+					{avatarError}
 				</span>
 			</div>
 			<label htmlFor='fullName' className={styles.formLabel}>
