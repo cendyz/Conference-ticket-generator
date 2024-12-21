@@ -20,7 +20,39 @@ const Form = () => {
 				</label>
 				<input id='avatar' className={styles.avatarInput} type='file' />
 			</div>
-            <p className="upload-info"></p>
+			<div className={styles.avatarErrorInfo}>
+				<img
+					src='src/images/icon-info.svg'
+					alt='Alert icon'
+					className={styles.alertIcon}
+				/>
+				<span className={styles.errorInfo}>
+					Upload your photo (JPG or PNG, max size: 500KB).
+				</span>
+			</div>
+			<label htmlFor='fullName' className={styles.formLabel}>
+				Full Name
+			</label>
+			<input type='text' className={styles.formInput} id='fullName' />
+			<label htmlFor='email' className={styles.formLabel}>
+				Email Address
+			</label>
+			<input
+				type='text'
+				className={styles.formInput}
+				id='email'
+				placeholder='example@email.com'
+			/>
+			<label htmlFor='username' className={styles.formLabel}>
+				Github Username
+			</label>
+			<input
+				type='text'
+				className={styles.formInput}
+				id='username'
+				placeholder='@yourusername'
+			/>
+			<button type='submit' className={styles.submitBtn}>Generate My Ticket</button>
 		</form>
 	)
 }

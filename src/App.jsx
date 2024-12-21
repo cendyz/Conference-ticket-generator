@@ -13,7 +13,7 @@ export default App
 
 //   Upload Avatar
 //   Drag and drop or click to upload
-//   Upload your photo (JPG or PNG, max size: 500KB).
+//   
 
 //   Full Name
 
