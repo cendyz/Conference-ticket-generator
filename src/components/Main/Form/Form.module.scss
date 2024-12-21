@@ -25,7 +25,8 @@
 }
 
 .customFileUpload,
-.avatarErrorInfo {
+.avatarErrorInfo,
+.errorBox {
 	display: flex;
 	align-items: center;
 }
@@ -61,7 +62,8 @@
 	margin-top: 0.6em;
 }
 
-.alertIcon {
+.alertIcon,
+.errorIcon {
 	margin-right: 0.3em;
 }
 
@@ -76,16 +78,16 @@
 }
 
 .formLabel {
-	margin-bottom: 0.6em;
+	margin-top: 1.2em;
 	color: $neutral-0;
 
 	&:nth-child(4) {
-		margin-top: 1em;
+		margin-top: 1.5em;
 	}
 }
 
 .formInput {
-	margin-bottom: 1.8em;
+	margin-top: 1em;
 	background-color: $transparent-bg;
 	color: $neutral-300;
 	border: 1px solid $neutral-500;
@@ -104,4 +106,17 @@
 	letter-spacing: -1px;
 	background-color: $orange-500;
 	font-weight: $weights-800;
+}
+
+.errorBox {
+	margin-top: 0.4em;
+}
+
+.errorText {
+	color: $orange-700;
+	font-size: 1.18rem;
+}
+
+.errorIcon {
+	filter: invert(73%) sepia(43%) saturate(7498%) brightness(93%);
 }
