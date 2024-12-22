@@ -15,8 +15,8 @@ const Form = () => {
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)
-	// const [file, setFile] = useState(null)
-	// const [preview, setPreview] = useState(null)
+	const [preview, setPreview] = useState(null)
+	const [loaded, setLoaded] = useState(false)
 
 	const handleChange = e => {
 		setUser({ ...user, [e.target.name]: e.target.value })
@@ -24,15 +24,26 @@ const Form = () => {
 
 	const handleFileChange = e => {
 		const selectedFile = e.target.files[0]
+		if (!selectedFile) {
+			return
+		}
 		if (selectedFile && selectedFile.size > 500 * 1024) {
-			setFileError('File size should be less than 500 KB')
-			setFile(null)
+			setFileError(true)
+			setAvatarError('File size should be less than 500 KB')
 			setPreview(null)
+			setLoaded(false)
 		} else {
-			setFileError('')
-			setFile(selectedFile)
+			setLoaded(true)
+			setFileError(false)
+			setAvatarError('Image uploaded successfully!')
 			setPreview(URL.createObjectURL(selectedFile))
 		}
+	}
+
+	const deletePhoto = () => {
+		setPreview(null)
+		setLoaded(false)
+		setAvatarError('Upload your photo (JPG or PNG, max 500KB)')
 	}
 
 	const handleSubmit = e => {
@@ -40,15 +51,8 @@ const Form = () => {
 
 		const formData = new FormData(e.currentTarget)
 		const newUser = Object.fromEntries(formData)
+
 		setUser(newUser)
-		console.log(user)
-		// if (
-		// 	checkEmail(newUser.email) &&
-		// 	checkNames(newUser.name, newUser.username)
-		// ) {
-		// 	setUser(newUser)
-		// 	console.log(user);
-		// }
 	}
 
 	return (
@@ -57,16 +61,38 @@ const Form = () => {
 				Upload Avatar
 			</label>
 			<div className={styles.uploadBox}>
-				<label htmlFor='avatar' className={styles.customFileUpload}>
-					<img
-						src='src/images/icon-upload.svg'
-						alt='Upload icon'
-						className={styles.uploadIcon}
-					/>
-					<span className={styles.uploadDesc}>
-						Drag and drop or click to upload
-					</span>
-				</label>
+				{loaded ? (
+					<div
+						className={styles.customFileUpload}
+						style={loaded ? { cursor: 'default' } : {}}>
+						<img
+							src={preview}
+							alt='Upload image'
+							className={styles.uploadIcon}
+							style={loaded ? { padding: '0' } : {}}
+						/>
+						<div className={styles.btnsBox}>
+							<button className={styles.imgBtn} onClick={deletePhoto}>
+								Remove image
+							</button>
+							<label htmlFor='avatar' className={styles.imgBtn}>
+								Change image
+							</label>
+						</div>
+					</div>
+				) : (
+					<label htmlFor='avatar' className={styles.customFileUpload}>
+						<img
+							src='src/images/icon-upload.svg'
+							alt='Upload icon'
+							className={styles.uploadIcon}
+						/>
+						<span className={styles.uploadDesc}>
+							Drag and drop or click to upload
+						</span>
+					</label>
+				)}
+
 				<input
 					id='avatar'
 					className={styles.avatarInput}

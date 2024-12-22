@@ -19,6 +19,7 @@
 
 .uploadIcon {
 	padding: 0.5em;
+	margin-bottom: 0.3em;
 	background-color: $transparent-icon;
 	border-radius: 0.5em;
 	border: 1px solid $neutral-700;
@@ -50,6 +51,11 @@
 	border: 1px dashed $neutral-500;
 	background-color: $transparent-bg;
 	cursor: pointer;
+}
+
+.uploadIcon {
+	width: 51.6px;
+	height: 51.6px;
 }
 
 .uploadDesc {
@@ -125,4 +131,28 @@
 
 .errorTextColor {
 	color: $orange-700;
+}
+
+.btnsBox {
+	display: flex;
+	align-items: center;
+	column-gap: 0.5em;
+	height: 18.4px;
+
+}
+
+.imgBtn {
+	padding: 0.5em 0.6em;
+	border-radius: 0.5em;
+	background-color: $neutral-700;
+	color: $neutral-0;
+	font-size: 1.2rem;
+	z-index: 100;
+	cursor: pointer;
+
+		&:first-child {
+		text-decoration: underline;
+		color: $neutral-300;
+	}
+	
 }
