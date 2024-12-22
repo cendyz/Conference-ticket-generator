@@ -6,6 +6,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const Form = () => {
 	const [user, setUser] = useState({
+		avatar: '',
 		name: '',
 		email: '',
 		username: '',
@@ -14,6 +15,8 @@ const Form = () => {
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)
+	// const [file, setFile] = useState(null)
+	// const [preview, setPreview] = useState(null)
 
 	const handleChange = e => {
 		setUser({ ...user, [e.target.name]: e.target.value })
@@ -22,40 +25,34 @@ const Form = () => {
 	const handleFileChange = e => {
 		const selectedFile = e.target.files[0]
 		if (selectedFile && selectedFile.size > 500 * 1024) {
-			setAvatarError(
-				'File too large. Please upload a file less than 500KB'
-			)
-			setFileError(true)
+			setFileError('File size should be less than 500 KB')
+			setFile(null)
+			setPreview(null)
 		} else {
-			setAvatarError('Your photo is uploaded successfully!')
-			setFileError(false)
+			setFileError('')
+			setFile(selectedFile)
+			setPreview(URL.createObjectURL(selectedFile))
 		}
-	}
-
-	const checkEmail = email => {
-		return emailRegex.test(email)
-	}
-
-	const checkNames = (name, username) => {
-		return name !== '' && username !== ''
 	}
 
 	const handleSubmit = e => {
-		// e.preventDefault()
+		e.preventDefault()
 
 		const formData = new FormData(e.currentTarget)
 		const newUser = Object.fromEntries(formData)
-
-		if (
-			checkEmail(newUser.email) &&
-			checkNames(newUser.name, newUser.username)
-		) {
-			setUser(newUser)
-		}
+		setUser(newUser)
+		console.log(user)
+		// if (
+		// 	checkEmail(newUser.email) &&
+		// 	checkNames(newUser.name, newUser.username)
+		// ) {
+		// 	setUser(newUser)
+		// 	console.log(user);
+		// }
 	}
 
 	return (
-		<form className={styles.form} onClick={handleSubmit}>
+		<form className={styles.form} onSubmit={handleSubmit}>
 			<label htmlFor='avatar' className={styles.avatarLabel}>
 				Upload Avatar
 			</label>
@@ -151,3 +148,24 @@ const Form = () => {
 	)
 }
 export default Form
+
+// const checkEmail = email => {
+// 	return emailRegex.test(email)
+// }
+
+// const checkNames = (name, username) => {
+// 	return name !== '' && username !== ''
+// }
+
+// const handleFileChange = e => {
+// 	const selectedFile = e.target.files[0]
+// 	if (selectedFile && selectedFile.size > 500 * 1024) {
+// 		setAvatarError(
+// 			'File too large. Please upload a file less than 500KB'
+// 		)
+// 		setFileError(true)
+// 	} else {
+// 		setAvatarError('Your photo is uploaded successfully!')
+// 		setFileError(false)
+// 	}
+// }
