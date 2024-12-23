@@ -1,23 +1,29 @@
 import styles from './Form.module.scss'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import classNames from 'classnames'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const Form = () => {
 	const [user, setUser] = useState({
-		avatar: '',
 		name: '',
 		email: '',
 		username: '',
 	})
+	const fileInputRef = useRef(null)
+	const [loaded, setLoaded] = useState(false)
 	const [fileError, setFileError] = useState(false)
+	const [preview, setPreview] = useState(null)
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)
-	const [preview, setPreview] = useState(null)
-	const [loaded, setLoaded] = useState(false)
-
+	const [emailError, setEmailError] = useState(false)
+	const [succes, setSuccess] = useState(false)
+	const [redBorder, setRedBorder] = useState(false)
+	const [avatarBorder, setAvatarBorder] = useState(false)
+	const [nameBorder, setNameBorder] = useState(false)
+	const [emailBorder, setEmailBorder] = useState(false)
+	const [usernameBorder, setUsernameBorder] = useState(false)
 	const handleChange = e => {
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
@@ -27,32 +33,77 @@ const Form = () => {
 		if (!selectedFile) {
 			return
 		}
+
 		if (selectedFile && selectedFile.size > 500 * 1024) {
+			setAvatarError('Your file is too large.')
 			setFileError(true)
-			setAvatarError('File size should be less than 500 KB')
-			setPreview(null)
 			setLoaded(false)
+			setPreview(null)
 		} else {
-			setLoaded(true)
-			setFileError(false)
 			setAvatarError('Image uploaded successfully!')
+			setFileError(false)
+			setLoaded(true)
+			setRedBorder(false)
 			setPreview(URL.createObjectURL(selectedFile))
 		}
 	}
 
+	const checkEmail = () => {
+		if (!emailRegex.test(user.email)) {
+			setEmailError(true)
+			return false
+		} else {
+			setEmailError(false)
+			return true
+		}
+	}
+
+	const checkInputs = () => {
+		if (!user.name) {
+			setNameBorder(true)
+		} else {
+			setNameBorder(false)
+		}
+		if (!user.email) {
+			setEmailBorder(true)
+		} else {
+			setEmailBorder(false)
+		}
+		if (!user.username) {
+			setUsernameBorder(true)
+		} else {
+			setUsernameBorder(false)
+		}
+		if (!preview) {
+			setAvatarBorder(true)
+		} else {
+			setAvatarBorder(false)
+		}
+
+		checkEmail()
+		if (!user.name || !user.email || !user.username || !preview) {
+			return false
+		}
+	}
+
 	const deletePhoto = () => {
-		setPreview(null)
-		setLoaded(false)
 		setAvatarError('Upload your photo (JPG or PNG, max 500KB)')
+		setLoaded(false)
+		setPreview(null)
+		fileInputRef.current.value = null
 	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
 
-		const formData = new FormData(e.currentTarget)
-		const newUser = Object.fromEntries(formData)
-
-		setUser(newUser)
+		if (checkInputs()) {
+			const formData = new FormData(e.currentTarget)
+			const newUser = Object.fromEntries(formData)
+			setUser(newUser)
+			console.log('Form submitted successfully')
+		} else {
+			console.log('Form submission failed')
+		}
 	}
 
 	return (
@@ -81,7 +132,11 @@ const Form = () => {
 						</div>
 					</div>
 				) : (
-					<label htmlFor='avatar' className={styles.customFileUpload}>
+					<label
+						htmlFor='avatar'
+						className={`${styles.customFileUpload} ${
+							avatarBorder ? styles.redDottedBorder : ''
+						}`}>
 						<img
 							src='src/images/icon-upload.svg'
 							alt='Upload icon'
@@ -100,6 +155,7 @@ const Form = () => {
 					name='avatar'
 					accept='image/png, image/jpeg'
 					onChange={handleFileChange}
+					ref={fileInputRef}
 				/>
 			</div>
 			<div className={styles.avatarErrorInfo}>
@@ -126,7 +182,9 @@ const Form = () => {
 			</label>
 			<input
 				type='text'
-				className={styles.formInput}
+				className={`${styles.formInput} ${
+					nameBorder ? styles.redBorder : ''
+				}`}
 				id='fullName'
 				name='name'
 				onChange={handleChange}
@@ -136,37 +194,42 @@ const Form = () => {
 				Email Address
 			</label>
 			<input
-				type='email'
-				className={styles.formInput}
+				type='text'
+				className={`${styles.formInput} ${
+					emailBorder ? styles.redBorder : ''
+				}`}
 				id='email'
 				placeholder='example@email.com'
 				name='email'
 				onChange={handleChange}
 				value={user.email}
 			/>
-			<div className={styles.errorBox}>
-				<img
-					src='src/images/icon-info.svg'
-					alt='Error icon'
-					className={styles.errorIcon}
-				/>
-				<p className={styles.errorText}>
-					Please enter a valid email address.
-				</p>
-			</div>
+			{emailError && (
+				<div className={styles.errorBox}>
+					<img
+						src='src/images/icon-info.svg'
+						alt='Error icon'
+						className={styles.errorIcon}
+					/>
+					<p className={styles.errorText}>
+						Please enter a valid email address.
+					</p>
+				</div>
+			)}
 			<label htmlFor='username' className={styles.formLabel}>
 				Github Username
 			</label>
 			<input
 				type='text'
-				className={styles.formInput}
+				className={`${styles.formInput} ${
+					usernameBorder ? styles.redBorder : ''
+				}`}
 				id='username'
 				placeholder='@yourusername'
 				name='username'
 				onChange={handleChange}
 				value={user.username}
 			/>
-
 			<button type='submit' className={styles.submitBtn}>
 				Generate My Ticket
 			</button>
@@ -174,24 +237,3 @@ const Form = () => {
 	)
 }
 export default Form
-
-// const checkEmail = email => {
-// 	return emailRegex.test(email)
-// }
-
-// const checkNames = (name, username) => {
-// 	return name !== '' && username !== ''
-// }
-
-// const handleFileChange = e => {
-// 	const selectedFile = e.target.files[0]
-// 	if (selectedFile && selectedFile.size > 500 * 1024) {
-// 		setAvatarError(
-// 			'File too large. Please upload a file less than 500KB'
-// 		)
-// 		setFileError(true)
-// 	} else {
-// 		setAvatarError('Your photo is uploaded successfully!')
-// 		setFileError(false)
-// 	}
-// }

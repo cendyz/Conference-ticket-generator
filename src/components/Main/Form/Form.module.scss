@@ -116,7 +116,6 @@
 }
 
 .errorBox {
-	display: none;
 	margin-top: 0.4em;
 }
 
@@ -155,4 +154,12 @@
 		color: $neutral-300;
 	}
 	
+}
+
+.redBorder {
+	border: 1px solid $orange-700;
+}
+
+.redDottedBorder {
+	border: 1px dashed $orange-700;
 }
