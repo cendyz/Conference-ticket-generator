@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-const Form = () => {
+const Form = ({ setSuccess, setComplete }) => {
 	const [user, setUser] = useState({
 		name: '',
 		email: '',
@@ -17,7 +17,6 @@ const Form = () => {
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)
-	const [succes, setSuccess] = useState(false)
 
 	const [errors, setErros] = useState({
 		avatar: false,
@@ -92,6 +91,7 @@ const Form = () => {
 			const newUser = Object.fromEntries(formData)
 			setUser(newUser)
 			setSuccess(true)
+			setComplete(false)
 		}
 	}
 
