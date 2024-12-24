@@ -31,6 +31,18 @@ const Form = () => {
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
 
+	const handleUsername = e => {
+		let value = e.target.value
+
+		if (value === '') {
+			setUser({ ...user, username: '' })
+		} else if (!value.startsWith('@')) {
+			setUser({ ...user, username: '@' + value })
+		} else {
+			setUser({ ...user, username: value })
+		}
+	}
+
 	const handleFileChange = e => {
 		const selectedFile = e.target.files[0]
 		if (!selectedFile) {
@@ -61,7 +73,7 @@ const Form = () => {
 
 		setErros(newErrors)
 
-		return console.log(!Object.values(newErrors).some(error => error))
+		return !Object.values(newErrors).some(error => error)
 	}
 
 	const deletePhoto = () => {
@@ -79,140 +91,140 @@ const Form = () => {
 			const formData = new FormData(e.currentTarget)
 			const newUser = Object.fromEntries(formData)
 			setUser(newUser)
-			console.log('Form submitted successfully')
-		} else {
-			console.log('Form submission failed')
+			setSuccess(true)
 		}
 	}
 
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
-			<label htmlFor='avatar' className={styles.avatarLabel}>
-				Upload Avatar
-			</label>
-			<div className={styles.uploadBox}>
-				{loaded ? (
-					<div
-						className={styles.customFileUpload}
-						style={loaded ? { cursor: 'default' } : {}}>
-						<img
-							src={preview}
-							alt='Upload image'
-							className={styles.uploadIcon}
-							style={loaded ? { padding: '0' } : {}}
-						/>
-						<div className={styles.btnsBox}>
-							<button className={styles.imgBtn} onClick={deletePhoto}>
-								Remove image
-							</button>
-							<label htmlFor='avatar' className={styles.imgBtn}>
-								Change image
-							</label>
+		<>
+			<form className={styles.form} onSubmit={handleSubmit}>
+				<label htmlFor='avatar' className={styles.avatarLabel}>
+					Upload Avatar
+				</label>
+				<div className={styles.uploadBox}>
+					{loaded ? (
+						<div
+							className={styles.customFileUpload}
+							style={loaded ? { cursor: 'default' } : {}}>
+							<img
+								src={preview}
+								alt='Upload image'
+								className={styles.uploadIcon}
+								style={loaded ? { padding: '0' } : {}}
+							/>
+							<div className={styles.btnsBox}>
+								<button className={styles.imgBtn} onClick={deletePhoto}>
+									Remove image
+								</button>
+								<label htmlFor='avatar' className={styles.imgBtn}>
+									Change image
+								</label>
+							</div>
 						</div>
-					</div>
-				) : (
-					<label
-						htmlFor='avatar'
-						className={`${styles.customFileUpload} ${
-							errors.avatar ? styles.redDottedBorder : ''
-						}`}>
-						<img
-							src='src/images/icon-upload.svg'
-							alt='Upload icon'
-							className={styles.uploadIcon}
-						/>
-						<span className={styles.uploadDesc}>
-							Drag and drop or click to upload
-						</span>
-					</label>
-				)}
+					) : (
+						<label
+							htmlFor='avatar'
+							className={`${styles.customFileUpload} ${
+								errors.avatar ? styles.redDottedBorder : ''
+							}`}>
+							<img
+								src='src/images/icon-upload.svg'
+								alt='Upload icon'
+								className={styles.uploadIcon}
+							/>
+							<span className={styles.uploadDesc}>
+								Drag and drop or click to upload
+							</span>
+						</label>
+					)}
 
-				<input
-					id='avatar'
-					className={styles.avatarInput}
-					type='file'
-					name='avatar'
-					accept='image/png, image/jpeg'
-					onChange={handleFileChange}
-					ref={fileInputRef}
-				/>
-			</div>
-			<div className={styles.avatarErrorInfo}>
-				<img
-					src='src/images/icon-info.svg'
-					alt='Alert icon'
-					className={
-						fileError
-							? classNames(styles.alertIcon, styles.errorIcon)
-							: styles.alertIcon
-					}
-				/>
-				<span
-					className={
-						fileError
-							? classNames(styles.errorInfo, styles.errorTextColor)
-							: styles.errorInfo
-					}>
-					{avatarError}
-				</span>
-			</div>
-			<label htmlFor='fullName' className={styles.formLabel}>
-				Full Name
-			</label>
-			<input
-				type='text'
-				className={`${styles.formInput} ${
-					errors.name ? styles.redBorder : ''
-				}`}
-				id='fullName'
-				name='name'
-				onChange={handleChange}
-				value={user.name}
-			/>
-			<label htmlFor='email' className={styles.formLabel}>
-				Email Address
-			</label>
-			<input
-				type='text'
-				className={`${styles.formInput} ${
-					errors.email ? styles.redBorder : ''
-				}`}
-				id='email'
-				placeholder='example@email.com'
-				name='email'
-				onChange={handleChange}
-				value={user.email}
-			/>
-			{errors.emailFormat && (
-				<div className={styles.errorBox}>
+					<input
+						id='avatar'
+						className={styles.avatarInput}
+						type='file'
+						name='avatar'
+						accept='image/png, image/jpeg'
+						onChange={handleFileChange}
+						ref={fileInputRef}
+					/>
+				</div>
+				<div className={styles.avatarErrorInfo}>
 					<img
 						src='src/images/icon-info.svg'
-						alt='Error icon'
-						className={styles.errorIcon}
+						alt='Alert icon'
+						className={
+							fileError
+								? classNames(styles.alertIcon, styles.errorIcon)
+								: styles.alertIcon
+						}
 					/>
-					<p className={styles.errorText}>
-						Please enter a valid email address.
-					</p>
+					<span
+						className={
+							fileError
+								? classNames(styles.errorInfo, styles.errorTextColor)
+								: styles.errorInfo
+						}>
+						{avatarError}
+					</span>
 				</div>
-			)}
-			<label htmlFor='username' className={styles.formLabel}>
-				Github Username
-			</label>
-			<input
-				type='text'
-				className={`${styles.formInput} ${
-					errors.username ? styles.redBorder : ''
-				}`}
-				id='username'
-				placeholder='@yourusername'
-				name='username'
-				onChange={handleChange}
-				value={user.username}
-			/>
-			<button type='submit' className={styles.submitBtn}>
-				Generate My Ticket
-			</button>
-		</form>
+				<label htmlFor='fullName' className={styles.formLabel}>
+					Full Name
+				</label>
+				<input
+					type='text'
+					className={`${styles.formInput} ${
+						errors.name ? styles.redBorder : ''
+					}`}
+					id='fullName'
+					name='name'
+					onChange={handleChange}
+					value={user.name}
+				/>
+				<label htmlFor='email' className={styles.formLabel}>
+					Email Address
+				</label>
+				<input
+					type='text'
+					className={`${styles.formInput} ${
+						errors.email ? styles.redBorder : ''
+					}`}
+					id='email'
+					placeholder='example@email.com'
+					name='email'
+					onChange={handleChange}
+					value={user.email}
+				/>
+				{errors.emailFormat && (
+					<div className={styles.errorBox}>
+						<img
+							src='src/images/icon-info.svg'
+							alt='Error icon'
+							className={styles.errorIcon}
+						/>
+						<p className={styles.errorText}>
+							Please enter a valid email address.
+						</p>
+					</div>
+				)}
+				<label htmlFor='username' className={styles.formLabel}>
+					Github Username
+				</label>
+				<input
+					type='text'
+					className={`${styles.formInput} ${
+						errors.username ? styles.redBorder : ''
+					}`}
+					id='username'
+					placeholder='@yourusername'
+					name='username'
+					onChange={handleUsername}
+					value={user.username}
+				/>
+				<button type='submit' className={styles.submitBtn}>
+					Generate My Ticket
+				</button>
+			</form>
+		</>
 	)
 }
 export default Form
