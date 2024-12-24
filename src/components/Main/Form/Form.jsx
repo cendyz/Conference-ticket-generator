@@ -17,13 +17,16 @@ const Form = () => {
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)
-	const [emailError, setEmailError] = useState(false)
 	const [succes, setSuccess] = useState(false)
-	const [redBorder, setRedBorder] = useState(false)
-	const [avatarBorder, setAvatarBorder] = useState(false)
-	const [nameBorder, setNameBorder] = useState(false)
-	const [emailBorder, setEmailBorder] = useState(false)
-	const [usernameBorder, setUsernameBorder] = useState(false)
+
+	const [errors, setErros] = useState({
+		avatar: false,
+		name: false,
+		email: false,
+		username: false,
+		emailError: false,
+	})
+
 	const handleChange = e => {
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
@@ -43,53 +46,29 @@ const Form = () => {
 			setAvatarError('Image uploaded successfully!')
 			setFileError(false)
 			setLoaded(true)
-			setRedBorder(false)
 			setPreview(URL.createObjectURL(selectedFile))
 		}
 	}
 
-	const checkEmail = () => {
-		if (!emailRegex.test(user.email)) {
-			setEmailError(true)
-			return false
-		} else {
-			setEmailError(false)
-			return true
-		}
-	}
-
 	const checkInputs = () => {
-		if (!user.name) {
-			setNameBorder(true)
-		} else {
-			setNameBorder(false)
-		}
-		if (!user.email) {
-			setEmailBorder(true)
-		} else {
-			setEmailBorder(false)
-		}
-		if (!user.username) {
-			setUsernameBorder(true)
-		} else {
-			setUsernameBorder(false)
-		}
-		if (!preview) {
-			setAvatarBorder(true)
-		} else {
-			setAvatarBorder(false)
+		const newErrors = {
+			name: !user.name,
+			email: !user.email,
+			username: !user.username,
+			avatar: !preview,
+			emailFormat: !emailRegex.test(user.email),
 		}
 
-		checkEmail()
-		if (!user.name || !user.email || !user.username || !preview) {
-			return false
-		}
+		setErros(newErrors)
+
+		return console.log(!Object.values(newErrors).some(error => error))
 	}
 
 	const deletePhoto = () => {
 		setAvatarError('Upload your photo (JPG or PNG, max 500KB)')
 		setLoaded(false)
 		setPreview(null)
+		setErros({ ...errors, avatar: false })
 		fileInputRef.current.value = null
 	}
 
@@ -135,7 +114,7 @@ const Form = () => {
 					<label
 						htmlFor='avatar'
 						className={`${styles.customFileUpload} ${
-							avatarBorder ? styles.redDottedBorder : ''
+							errors.avatar ? styles.redDottedBorder : ''
 						}`}>
 						<img
 							src='src/images/icon-upload.svg'
@@ -183,7 +162,7 @@ const Form = () => {
 			<input
 				type='text'
 				className={`${styles.formInput} ${
-					nameBorder ? styles.redBorder : ''
+					errors.name ? styles.redBorder : ''
 				}`}
 				id='fullName'
 				name='name'
@@ -196,7 +175,7 @@ const Form = () => {
 			<input
 				type='text'
 				className={`${styles.formInput} ${
-					emailBorder ? styles.redBorder : ''
+					errors.email ? styles.redBorder : ''
 				}`}
 				id='email'
 				placeholder='example@email.com'
@@ -204,7 +183,7 @@ const Form = () => {
 				onChange={handleChange}
 				value={user.email}
 			/>
-			{emailError && (
+			{errors.emailFormat && (
 				<div className={styles.errorBox}>
 					<img
 						src='src/images/icon-info.svg'
@@ -222,7 +201,7 @@ const Form = () => {
 			<input
 				type='text'
 				className={`${styles.formInput} ${
-					usernameBorder ? styles.redBorder : ''
+					errors.username ? styles.redBorder : ''
 				}`}
 				id='username'
 				placeholder='@yourusername'
