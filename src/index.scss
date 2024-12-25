@@ -13,3 +13,14 @@ body {
 	display: flex;
 	justify-content: center;
 }
+
+@media (min-width: 768px) {
+	body {
+		background-image: url('./images/background-tablet.png');
+	}
+}
+@media (min-width: 992px) {
+	body {
+		background-image: url('./images/background-desktop.png');
+	}
+}

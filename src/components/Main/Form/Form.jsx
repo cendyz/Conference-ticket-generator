@@ -12,7 +12,8 @@ const Form = () => {
 		user,
 		setUser,
 		preview,
-		setPreview, handleTicketNumber
+		setPreview,
+		handleTicketNumber,
 	} = useGlobalContext()
 
 	const fileInputRef = useRef(null)
@@ -96,10 +97,8 @@ const Form = () => {
 			setUser(newUser)
 			handleComplete()
 			handleTicketNumber()
-		} 
+		}
 	}
-
-
 
 	return (
 		<>
