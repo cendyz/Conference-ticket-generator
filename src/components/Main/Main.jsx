@@ -11,7 +11,6 @@ const Main = () => {
 			{!completeForm && (
 				<>
 					<UpperBox />
-
 					<Form />
 				</>
 			)}

@@ -2,12 +2,13 @@ import styles from './Form.module.scss'
 import { useState, useRef } from 'react'
 import classNames from 'classnames'
 import { useGlobalContext } from '../../../Context'
+import uploadIcon from '../../../images/icon-upload.svg'
+import iconInfo from '../../../images/icon-info.svg'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const Form = () => {
 	const {
-		completeForm,
 		handleComplete,
 		user,
 		setUser,
@@ -133,7 +134,7 @@ const Form = () => {
 								errors.avatar ? styles.redDottedBorder : ''
 							}`}>
 							<img
-								src='src/images/icon-upload.svg'
+								src={uploadIcon}
 								alt='Upload icon'
 								className={styles.uploadIcon}
 							/>
@@ -155,7 +156,7 @@ const Form = () => {
 				</div>
 				<div className={styles.avatarErrorInfo}>
 					<img
-						src='src/images/icon-info.svg'
+						src={iconInfo}
 						alt='Alert icon'
 						className={
 							fileError
@@ -202,7 +203,7 @@ const Form = () => {
 				{errors.emailFormat && (
 					<div className={styles.errorBox}>
 						<img
-							src='src/images/icon-info.svg'
+							src={iconInfo}
 							alt='Error icon'
 							className={styles.errorIcon}
 						/>

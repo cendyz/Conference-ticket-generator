@@ -1,6 +1,7 @@
 import styles from './Complete.module.scss'
 import { useGlobalContext } from '../../../Context'
 import Ticket from './Ticket'
+import logo from '../../../images/logo-full.svg'
 
 const Complete = () => {
 	const { user } = useGlobalContext()
@@ -8,8 +9,8 @@ const Complete = () => {
 		<>
 			<section className={styles.section}>
 				<img
-					src='src/images/logo-full.svg'
-					alt=''
+					src={logo}
+					alt='Logo'
 					className={styles.logo}
 				/>
 				<h2 className={styles.title}>
@@ -19,7 +20,7 @@ const Complete = () => {
 				<p className={styles.desc}>
 					We've emailed your ticket to{' '}
 					<span className={styles.email}>
-						{user.email || 'jonatan@email.com'}
+						{user.email}
 					</span>{' '}
 					and will send updates in the run up to the event.
 				</p>

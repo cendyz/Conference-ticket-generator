@@ -1,6 +1,8 @@
 import styles from './Ticket.module.scss'
 import { useGlobalContext } from '../../../../Context'
-import { useState } from 'react'
+import ticketPattern from '../../../../images/pattern-ticket.svg'
+import githubIcon from '../../../../images/icon-github.svg'
+import logoMark from '../../../../images/logo-mark.svg'
 
 const Ticket = () => {
 	const { user, preview, ticketNumber } = useGlobalContext()
@@ -10,7 +12,7 @@ const Ticket = () => {
 				<div className={styles.leftPart}>
 					<div className={styles.leftUp}>
 						<img
-							src='src/images/logo-mark.svg'
+							src={logoMark}
 							alt='Logo'
 							className={styles.logo}
 						/>
@@ -25,7 +27,7 @@ const Ticket = () => {
 							<h3 className={styles.personName}>{user.name}</h3>
 							<p className={styles.personGit}>
 								<img
-									src='src/images/icon-github.svg'
+									src={githubIcon}
 									alt='Github icon'
 									className={styles.gitIcon}
 								/>{' '}
@@ -38,7 +40,7 @@ const Ticket = () => {
 			<div className={styles.ticketNumber}>
 				<p className={styles.number}>#0{ticketNumber}</p>
 			</div>
-			<img src="src/images/pattern-ticket.svg" alt="Ticket pattern" className={styles.ticketPattern} />
+			<img src={ticketPattern} alt="Ticket pattern" className={styles.ticketPattern} />
 		</section>
 	)
 }
