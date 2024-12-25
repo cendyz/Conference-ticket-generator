@@ -1,43 +1,28 @@
 @use '../../../../sass/colors.scss' as *;
 
 .section {
+	position: relative;
+	width: 100%;
 	padding: 1em;
 }
 
 .ticket {
-	position: relative;
-	padding: 0.8em;
+	background-image: url('../../../../images/pattern-ticket.svg');
+	padding: 1em;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
 
-	&::before,
-	&::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-        border-radius: 0.4em;
-	}
+.ticketNumber {
+	position: absolute;
+	rotate: 90deg;
+	right: 4%;
+	bottom: calc(50% - 0.5em);
+}
 
-	&::before {
-		padding: 2px;
-		background: $gradient-border;
-		-webkit-mask: linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-		mask-composite: exclude;
-	}
-
-	&::after {
-		background: rgb(35, 33, 70);
-		background: linear-gradient(
-			90deg,
-			rgba(35, 33, 70, 0.6643032212885154) 0%,
-			rgba(98, 73, 139, 0.6502976190476191) 100%
-		);
-		z-index: -2;
-	}
+.number {
+	font-size: 2.3rem;
+	color: $neutral-500;
 }
 
 .logo {
@@ -48,9 +33,15 @@
 .eventInfo,
 .personInfo,
 .leftDown,
-.personGit {
+.personGit,
+.leftPart {
 	display: flex;
 	color: $neutral-0;
+}
+
+.leftPart {
+	flex-direction: column;
+	row-gap: 0.7em;
 }
 
 .leftUp {
@@ -70,13 +61,13 @@
 
 .eventDate,
 .personGit {
-	margin-top: 1em;
+	margin-top: 0.5em;
 	color: $neutral-300;
 	font-size: 1.3rem;
 }
 
 .leftDown {
-	margin-top: 2.5em;
+	margin-top: 1em;
 	column-gap: 0.7em;
 }
 
@@ -94,6 +85,7 @@
 }
 
 .avatar {
-	width: 50px;
+	width: 40px;
+	height: 40px;
 	border-radius: 0.4em;
 }

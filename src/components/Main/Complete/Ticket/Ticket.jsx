@@ -29,6 +29,9 @@ const Ticket = () => {
 					</div>
 				</div>
 			</div>
+				<div className={styles.ticketNumber}>
+					<p className={styles.number}>#01609</p>
+				</div>
 		</section>
 	)
 }
