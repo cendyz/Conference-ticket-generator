@@ -14,3 +14,9 @@ $gradient-text: linear-gradient(
 	hsl(7, 86%, 67%),
 	hsl(0, 0%, 100%)
 );
+$gradient-border: linear-gradient(
+		to right,
+		rgba(255, 255, 255, .3),
+		rgba(243, 115, 98, .3)
+	)
+	;

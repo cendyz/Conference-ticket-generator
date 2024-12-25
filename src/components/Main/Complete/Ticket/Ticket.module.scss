@@ -1,0 +1,99 @@
+@use '../../../../sass/colors.scss' as *;
+
+.section {
+	padding: 1em;
+}
+
+.ticket {
+	position: relative;
+	padding: 0.8em;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+        border-radius: 0.4em;
+	}
+
+	&::before {
+		padding: 2px;
+		background: $gradient-border;
+		-webkit-mask: linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+	}
+
+	&::after {
+		background: rgb(35, 33, 70);
+		background: linear-gradient(
+			90deg,
+			rgba(35, 33, 70, 0.6643032212885154) 0%,
+			rgba(98, 73, 139, 0.6502976190476191) 100%
+		);
+		z-index: -2;
+	}
+}
+
+.logo {
+	width: 30px;
+}
+
+.leftUp,
+.eventInfo,
+.personInfo,
+.leftDown,
+.personGit {
+	display: flex;
+	color: $neutral-0;
+}
+
+.leftUp {
+	align-items: flex-start;
+	column-gap: 0.8em;
+}
+
+.eventInfo {
+	flex-direction: column;
+	justify-content: flex-start;
+	text-align: left;
+}
+
+.eventName {
+	font-size: 2rem;
+}
+
+.eventDate,
+.personGit {
+	margin-top: 1em;
+	color: $neutral-300;
+	font-size: 1.3rem;
+}
+
+.leftDown {
+	margin-top: 2.5em;
+	column-gap: 0.7em;
+}
+
+.personInfo {
+	flex-wrap: wrap;
+}
+
+.personName {
+	font-size: 1.7rem;
+}
+
+.personGit {
+	align-items: center;
+	column-gap: 0.3em;
+}
+
+.avatar {
+	width: 50px;
+	border-radius: 0.4em;
+}

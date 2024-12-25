@@ -5,7 +5,8 @@ body {
 	font-size: $label;
 	font-family: 'Inconsolata', serif;
 	background-image: url('./images/background-mobile.png');
-	background-size: cover;
+	background-size: 150%;
+	background-position: 100% 85%;
 }
 
 #root {
