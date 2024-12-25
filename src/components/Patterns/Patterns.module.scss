@@ -42,15 +42,10 @@
 }
 
 @media (min-width: 992px) {
-	.lines,
-	.squiggly-line {
-		left: 0;
-	}
-
 	.circles {
-		top: 50%;
-		right: 25%;
-		width: 200px;
+		top: 47%;
+		right: 28%;
+		width: 150px;
 	}
 
 	.lines {
@@ -58,13 +53,13 @@
 	}
 
 	.bottomLine {
-		width: 79%;
-		bottom: 0;
+		width: 49%;
+		bottom: -15%;
 	}
 
 	.topLine {
-		top: 4%;
+		top: 10%;
 		right: 0;
-		width: 23%;
+		width: 33%;
 	}
 }

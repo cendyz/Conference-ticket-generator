@@ -16,7 +16,6 @@ const Main = () => {
 				</>
 			)}
 			{completeForm && <Complete />}
-			{/* <Complete/> */}
 		</main>
 	)
 }
