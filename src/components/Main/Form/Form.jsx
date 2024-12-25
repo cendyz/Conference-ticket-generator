@@ -1,15 +1,13 @@
 import styles from './Form.module.scss'
 import { useState, useRef } from 'react'
 import classNames from 'classnames'
+import { useGlobalContext } from '../../../Context'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-const Form = ({ setSuccess, setComplete }) => {
-	const [user, setUser] = useState({
-		name: '',
-		email: '',
-		username: '',
-	})
+const Form = () => {
+	const { completeForm, handleComplete, user, setUser } = useGlobalContext()
+
 	const fileInputRef = useRef(null)
 	const [loaded, setLoaded] = useState(false)
 	const [fileError, setFileError] = useState(false)
@@ -90,8 +88,10 @@ const Form = ({ setSuccess, setComplete }) => {
 			const formData = new FormData(e.currentTarget)
 			const newUser = Object.fromEntries(formData)
 			setUser(newUser)
-			setSuccess(true)
-			setComplete(false)
+			handleComplete()
+			console.log(completeForm);
+		} else {
+			console.log(completeForm);
 		}
 	}
 

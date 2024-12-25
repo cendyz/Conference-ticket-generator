@@ -1,0 +1,33 @@
+@use '../../../sass/colors.scss' as *;
+@use '../../../sass/fonts.scss' as *;
+
+.section {
+	text-align: center;
+	padding: 2.3em 1.55em;
+}
+
+.title,
+.desc {
+	margin-top: 1em;
+	line-height: 1.2;
+}
+
+.title {
+	color: $neutral-0;
+	font-size: 2.7rem;
+}
+
+.name {
+	background: $gradient-text;
+	background-clip: text;
+	color: transparent;
+}
+
+.desc {
+	color: $neutral-300;
+	font-size: 1.7rem;
+}
+
+.email {
+	color: $orange-500;
+}
