@@ -3,9 +3,8 @@ import { useGlobalContext } from '../../../../Context'
 import { useState } from 'react'
 
 const Ticket = () => {
-	const {user, preview} = useGlobalContext()
-	const [ticketNumber, setTicketNumber] = useState(1609)
-  return (
+	const { user, preview, ticketNumber } = useGlobalContext()
+	return (
 		<section className={styles.section}>
 			<div className={styles.ticket}>
 				<div className={styles.leftPart}>
@@ -21,21 +20,24 @@ const Ticket = () => {
 						</div>
 					</div>
 					<div className={styles.leftDown}>
-						<img
-							src={preview}
-							alt='Avatar'
-							className={styles.avatar}
-						/>
+						<img src={preview} alt='Avatar' className={styles.avatar} />
 						<div className={styles.personInfo}>
 							<h3 className={styles.personName}>{user.name}</h3>
-							<p className={styles.personGit}><img src="src/images/icon-github.svg" alt="Github icon" className={styles.gitIcon} /> {user.username}</p>
+							<p className={styles.personGit}>
+								<img
+									src='src/images/icon-github.svg'
+									alt='Github icon'
+									className={styles.gitIcon}
+								/>{' '}
+								{user.username}
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-				<div className={styles.ticketNumber}>
-					<p className={styles.number}>#0{ticketNumber}</p>
-				</div>
+			<div className={styles.ticketNumber}>
+				<p className={styles.number}>#0{ticketNumber}</p>
+			</div>
 		</section>
 	)
 }

@@ -12,7 +12,7 @@ const Form = () => {
 		user,
 		setUser,
 		preview,
-		setPreview,
+		setPreview, handleTicketNumber
 	} = useGlobalContext()
 
 	const fileInputRef = useRef(null)
@@ -95,11 +95,11 @@ const Form = () => {
 			const newUser = Object.fromEntries(formData)
 			setUser(newUser)
 			handleComplete()
-			console.log(completeForm);
-		} else {
-			console.log(completeForm);
-		}
+			handleTicketNumber()
+		} 
 	}
+
+
 
 	return (
 		<>
