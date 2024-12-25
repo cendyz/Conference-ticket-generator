@@ -38,6 +38,7 @@ const Ticket = () => {
 			<div className={styles.ticketNumber}>
 				<p className={styles.number}>#0{ticketNumber}</p>
 			</div>
+			<img src="src/images/pattern-ticket.svg" alt="Ticket pattern" className={styles.ticketPattern} />
 		</section>
 	)
 }

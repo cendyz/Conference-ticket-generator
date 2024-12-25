@@ -13,7 +13,7 @@ const Complete = () => {
 					className={styles.logo}
 				/>
 				<h2 className={styles.title}>
-					Congrats, <span className={styles.name}>Jonatan Kirstof!</span>{' '}
+					Congrats, <span className={styles.name}>{user.name}!</span>{' '}
 					Your ticket is ready.
 				</h2>
 				<p className={styles.desc}>

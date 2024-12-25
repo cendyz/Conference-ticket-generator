@@ -1,16 +1,23 @@
 @use '../../../../sass/colors.scss' as *;
+@use '../../../../sass/fonts.scss' as *;
 
 .section {
+	display: grid;
 	position: relative;
-	width: 100%;
 	padding: 1em;
 }
 
+.ticket,
+.ticketPattern {
+	grid-area: 1/1/-1/-1;
+}
+
 .ticket {
-	background-image: url('../../../../images/pattern-ticket.svg');
 	padding: 1em;
-	background-size: contain;
-	background-repeat: no-repeat;
+}
+
+.ticketPattern {
+	width: 100%;
 }
 
 .ticketNumber {
@@ -40,8 +47,9 @@
 }
 
 .leftPart {
+	height: 100%;
 	flex-direction: column;
-	row-gap: 0.7em;
+	justify-content: space-between;
 }
 
 .leftUp {
@@ -51,7 +59,6 @@
 
 .eventInfo {
 	flex-direction: column;
-	justify-content: flex-start;
 	text-align: left;
 }
 
@@ -77,6 +84,7 @@
 
 .personName {
 	font-size: 1.7rem;
+	font-weight: $weights-400;
 }
 
 .personGit {
@@ -88,4 +96,21 @@
 	width: 40px;
 	height: 40px;
 	border-radius: 0.4em;
+}
+
+@media (min-width: 992px) {
+	.section {
+		margin: 0 auto;
+		max-width: 500px;
+	}
+
+	.avatar {
+		width: 55px;
+		height: 55px;
+	}
+
+	.eventName {
+		font-size: 2.5rem;
+	}
+
 }

@@ -40,3 +40,31 @@
 	right: 0;
 	width: 33%;
 }
+
+@media (min-width: 992px) {
+	.lines,
+	.squiggly-line {
+		left: 0;
+	}
+
+	.circles {
+		top: 50%;
+		right: 25%;
+		width: 200px;
+	}
+
+	.lines {
+		width: 100%;
+	}
+
+	.bottomLine {
+		width: 79%;
+		bottom: 0;
+	}
+
+	.topLine {
+		top: 4%;
+		right: 0;
+		width: 23%;
+	}
+}
