@@ -6,12 +6,18 @@ import { useGlobalContext } from '../../../Context'
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const Form = () => {
-	const { completeForm, handleComplete, user, setUser } = useGlobalContext()
+	const {
+		completeForm,
+		handleComplete,
+		user,
+		setUser,
+		preview,
+		setPreview,
+	} = useGlobalContext()
 
 	const fileInputRef = useRef(null)
 	const [loaded, setLoaded] = useState(false)
 	const [fileError, setFileError] = useState(false)
-	const [preview, setPreview] = useState(null)
 	const [avatarError, setAvatarError] = useState(
 		'Upload your photo (JPG or PNG, max 500KB)'
 	)

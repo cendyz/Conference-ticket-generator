@@ -1,6 +1,10 @@
 import styles from './Ticket.module.scss'
+import { useGlobalContext } from '../../../../Context'
+import { useState } from 'react'
 
 const Ticket = () => {
+	const {user, preview} = useGlobalContext()
+	const [ticketNumber, setTicketNumber] = useState(1609)
   return (
 		<section className={styles.section}>
 			<div className={styles.ticket}>
@@ -18,19 +22,19 @@ const Ticket = () => {
 					</div>
 					<div className={styles.leftDown}>
 						<img
-							src='src/images/image-avatar.jpg'
+							src={preview}
 							alt='Avatar'
 							className={styles.avatar}
 						/>
 						<div className={styles.personInfo}>
-							<h3 className={styles.personName}>Jonatan Kristof</h3>
-							<p className={styles.personGit}><img src="src/images/icon-github.svg" alt="Github icon" className={styles.gitIcon} /> @jonatankristof0101</p>
+							<h3 className={styles.personName}>{user.name}</h3>
+							<p className={styles.personGit}><img src="src/images/icon-github.svg" alt="Github icon" className={styles.gitIcon} /> {user.username}</p>
 						</div>
 					</div>
 				</div>
 			</div>
 				<div className={styles.ticketNumber}>
-					<p className={styles.number}>#01609</p>
+					<p className={styles.number}>#0{ticketNumber}</p>
 				</div>
 		</section>
 	)

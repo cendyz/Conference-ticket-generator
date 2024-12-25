@@ -8,15 +8,15 @@ const Main = () => {
 	const { completeForm } = useGlobalContext()
 	return (
 		<main className={styles.main}>
-			{/* {!completeForm && (
+			{!completeForm && (
 				<>
 					<UpperBox />
 
 					<Form />
 				</>
 			)}
-			{completeForm && <Complete />} */}
-			<Complete/>
+			{completeForm && <Complete />}
+			{/* <Complete/> */}
 		</main>
 	)
 }
